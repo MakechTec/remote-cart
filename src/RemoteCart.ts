@@ -4,21 +4,14 @@ import {CartItem} from "@makechtec/cart-guidelines";
 
 export class RemoteCart implements Cart{
 
-    url: string = "";
-
-    go(url:string = ""){
-        this.url = url;
-        return this;
+    list(onSuccess: Function, makeUrl: Function = defaultUrls.list): void {
+        this.simpleCall(onSuccess, makeUrl());
     }
-
-    list(onSuccess: Function): void {
-        this.simpleCall(onSuccess);
+    clean(onSuccess: Function, makeUrl: Function = defaultUrls.clean): void {
+        this.removeCall(onSuccess, makeUrl());
     }
-    clean(onSuccess: Function): void {
-        this.removeCall(onSuccess);
-    }
-    add(item: CartItem, onSuccess: Function): void {
-        axios.post(this.url, {
+    add(item: CartItem, onSuccess: Function, makeUrl = defaultUrls.add): void {
+        axios.post(makeUrl(item), {
             attributes: JSON.stringify(item.attributes),
         }).then(response => {
             onSuccess(response.data);
@@ -26,37 +19,47 @@ export class RemoteCart implements Cart{
             this.handleError(error);
         });
     }
-    remove(item: CartItem, onSuccess: Function): void {
-        this.removeCall(onSuccess);
+    remove(item: CartItem, onSuccess: Function, makeUrl: Function = defaultUrls.remove): void {
+        this.removeCall(onSuccess, makeUrl(item));
     }
-    find(id: number, onSuccess: Function): void {
-        this.simpleCall(onSuccess);
+    find(id: number, onSuccess: Function, makeUrl: Function = defaultUrls.find): void {
+        this.simpleCall(onSuccess, makeUrl(id));
     }
-    total(attributeName: string, onSuccess: Function): void {
-        this.simpleCall(onSuccess);
+    total(attributeName: string, onSuccess: Function, makeUrl: Function = defaultUrls.total): void {
+        this.simpleCall(onSuccess, makeUrl(attributeName));
     }
-    numberOfItems(onSuccess: Function): void {
-        this.simpleCall(onSuccess);
+    numberOfItems(onSuccess: Function, makeUrl: Function = defaultUrls.numberOfItems): void {
+        this.simpleCall(onSuccess, makeUrl());
     }
 
     handleError(error: any){
         console.log(error);
     }
 
-    simpleCall(onSuccess: Function){
-        axios.get(this.url).then(response => {
+    simpleCall(onSuccess: Function, url: string){
+        axios.get(url).then(response => {
             onSuccess(response.data);
         }).catch(error => {
             this.handleError(error);
         });
     }
 
-    removeCall(onSuccess: Function){
-        axios.delete(this.url).then(response => {
+    removeCall(onSuccess: Function, url: string){
+        axios.delete(url).then(response => {
             onSuccess(response.data);
         }).catch(error => {
             this.handleError(error);
         });
     }
     
+}
+
+export const defaultUrls = {
+    list: () => "/cart/list",
+    clean: () => "/cart/clean",
+    add: (item: CartItem) => `/cart/add/${item.id}`,
+    remove: (item: CartItem) => `/cart/remove/${item.id}`,
+    find: (id: number) => `/cart/find/${id}`,
+    total: (attributeName: string) => `/cart/total/${attributeName}`,
+    numberOfItems: () => "/cart/numberOfItems",
 }
