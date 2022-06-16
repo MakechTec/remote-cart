@@ -1,0 +1,16 @@
+{
+  "dependencies": {
+    "@makechtec/cart-guidelines": "^1.0.3",
+    "axios": "^0.27.2"
+  },
+  "name": "@makechtec/remote-cart",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "makechtec",
+  "license": "MIT",
+  "description": ""
+}
