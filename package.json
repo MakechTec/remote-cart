@@ -1,7 +1,8 @@
 {
   "dependencies": {
     "@makechtec/cart-guidelines": "^1.0.6",
-    "axios": "^0.27.2"
+    "axios": "^0.27.2",
+    "terser": "^5.14.1"
   },
   "name": "@makechtec/remote-cart",
   "version": "1.0.5",

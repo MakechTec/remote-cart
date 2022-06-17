@@ -1,0 +1,5 @@
+
+
+tsc 
+
+terser prebuild/RemoteCart.js --output index.js

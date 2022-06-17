@@ -1,5 +1,0 @@
-export @if(default)default@endif interface ${name}{
-    @foreach(method)
-    ${method}() : void;
-    @endforeach
-}

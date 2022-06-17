@@ -1,7 +1,7 @@
 {
     "compilerOptions": {
-      "module": "commonjs",
       "outDir": "./prebuild",
+      "module": "commonjs",
     },
     "files": [
       "src/RemoteCart.ts",
