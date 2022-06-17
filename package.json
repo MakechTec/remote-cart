@@ -5,7 +5,7 @@
     "terser": "^5.14.1"
   },
   "name": "@makechtec/remote-cart",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "main": "index.js",
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.17.12",
