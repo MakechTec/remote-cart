@@ -1,5 +1,5 @@
 import axios from "axios";
-import {Cart} from "@makechtec/cart-guidelines";
+import {Attribute, Cart} from "@makechtec/cart-guidelines";
 import {CartItem} from "@makechtec/cart-guidelines";
 
 export class RemoteCart implements Cart{
@@ -13,6 +13,8 @@ export class RemoteCart implements Cart{
         find: (id: number) => this.host+`/cart/find/${id}`,
         total: (attributeName: string) => this.host+`/cart/total/${attributeName}`,
         numberOfItems: () => this.host+"/cart/numberOfItems",
+        findByAttribute: (attribute: Attribute) => this.host+`/cart/findByAttribute/${attribute.name}/${attribute.value}`,
+
     };
 
     constructor(host: string = "http://localhost:8000", defaultUrls: any = {}){
@@ -46,6 +48,10 @@ export class RemoteCart implements Cart{
     }
     numberOfItems(onSuccess: Function, makeUrl: Function = this.defaultUrls.numberOfItems): void {
         this.simpleCall(onSuccess, makeUrl());
+    }
+
+    findItemByAttribute(attribute: Attribute, onSuccess: Function, makeUrl: Function = this.defaultUrls.findByAttribute): void {
+        this.simpleCall(onSuccess, makeUrl(attribute));
     }
 
     handleError(error: any){

@@ -1,10 +1,10 @@
 {
   "dependencies": {
-    "@makechtec/cart-guidelines": "^1.0.3",
+    "@makechtec/cart-guidelines": "^1.0.6",
     "axios": "^0.27.2"
   },
   "name": "@makechtec/remote-cart",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "main": "index.js",
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.17.12",
